@@ -1,0 +1,87 @@
+name: 'Terraform Destroy'
+
+on:
+  workflow_dispatch:
+
+env:
+  tf_version: '1.5.7'
+  tg_version: '0.53.2'
+  working_dir: '.'
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    environment: ${{ github.ref_name }}
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@main
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+
+      - name: Check terragrunt HCL
+        uses: gruntwork-io/terragrunt-action@v2
+        with:
+          tf_version: ${{ env.tf_version }}
+          tg_version: ${{ env.tg_version }}
+          tg_dir: ${{ env.working_dir }}
+          tg_command: 'hclfmt --terragrunt-check --terragrunt-diff'
+
+  plan:
+    runs-on: ubuntu-latest
+    needs: [ checks ]
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@main
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+
+      - name: Set environment variables
+        run: |
+          echo "TF_VAR_CI_ENVIRONMENT_NAME=${{ github.ref_name }}" >> $GITHUB_ENV
+          echo "TF_VAR_CF_CLOUDFLARED_TOKEN=${{ secrets.TF_VAR_CF_CLOUDFLARED_TOKEN }}" >> $GITHUB_ENV
+
+      - name: Plan
+        uses: gruntwork-io/terragrunt-action@v2
+        with:
+          tf_version: ${{ env.tf_version }}
+          tg_version: ${{ env.tg_version }}
+          tg_dir: ${{ env.working_dir }}
+          tg_command: 'run-all plan --var-file=${{ github.ref_name }}.tfvars'
+
+  destroy:
+    runs-on: ubuntu-latest
+    needs: [ plan ]
+    environment: ${{ github.ref_name }}
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@main
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+
+      - name: Set environment variables
+        run: |
+          echo "TF_VAR_CI_ENVIRONMENT_NAME=${{ github.ref_name }}" >> $GITHUB_ENV
+          echo "TF_VAR_CF_CLOUDFLARED_TOKEN=${{ secrets.TF_VAR_CF_CLOUDFLARED_TOKEN }}" >> $GITHUB_ENV
+
+      - name: Destroy
+        uses: gruntwork-io/terragrunt-action@v2
+        with:
+          tf_version: ${{ env.tf_version }}
+          tg_version: ${{ env.tg_version }}
+          tg_dir: ${{ env.working_dir }}
+          tg_command: 'run-all destroy --var-file=${{ github.ref_name }}.tfvars -auto-approve --terragrunt-non-interactive'
