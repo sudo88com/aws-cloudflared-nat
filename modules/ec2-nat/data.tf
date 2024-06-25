@@ -1,4 +1,4 @@
-resource "aws_security_group" "default" {
+resource "aws_security_group" "selected" {
   name        = "default-${var.CI_ENVIRONMENT_NAME}-nat-sgrp"
   description = "default-${var.CI_ENVIRONMENT_NAME}-nat-sgrp"
   vpc_id      = data.aws_vpc.selected.id
@@ -23,18 +23,18 @@ resource "aws_security_group" "default" {
   }
 }
 
-resource "aws_eip" "nat" {
+resource "aws_eip" "selected" {
   tags = {
     Name = "default-${var.CI_ENVIRONMENT_NAME}-eip-nat-ec2"
   }
 }
 
-resource "aws_eip_association" "nat" {
+resource "aws_eip_association" "selected" {
   instance_id   = module.aws_ec2.id
-  allocation_id = aws_eip.nat.id
+  allocation_id = aws_eip.selected.id
 }
 
-data "aws_route_table" "private" {
+data "aws_route_table" "selected" {
   vpc_id = data.aws_vpc.selected.id
   filter {
     name   = "tag:Name"
@@ -42,8 +42,8 @@ data "aws_route_table" "private" {
   }
 }
 
-resource "aws_route" "private_route" {
-  route_table_id         = data.aws_route_table.private.id
+resource "aws_route" "selected" {
+  route_table_id         = data.aws_route_table.selected.id
   destination_cidr_block = "0.0.0.0/0"
   network_interface_id   = module.aws_ec2.primary_network_interface_id
 }
@@ -122,7 +122,7 @@ data "aws_subnets" "private_c" {
   }
 }
 
-data "aws_ami" "nat" {
+data "aws_ami" "selected" {
   most_recent = true
   filter {
     name   = "name"

@@ -1,5 +1,5 @@
 locals {
-  ami                                  = data.aws_ami.nat.id # data source
+  ami                                  = data.aws_ami.selected.id # data source
   ami_ssm_parameter                    = var.ami_ssm_parameter
   associate_public_ip_address          = var.associate_public_ip_address
   availability_zone                    = var.availability_zone
@@ -66,5 +66,5 @@ locals {
   })}") # user_data.sh
   user_data_replace_on_change = var.user_data_replace_on_change
   volume_tags                 = var.volume_tags
-  vpc_security_group_ids      = [aws_security_group.default.id]
+  vpc_security_group_ids      = [aws_security_group.selected.id]
 }
