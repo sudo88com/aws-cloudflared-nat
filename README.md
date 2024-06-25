@@ -50,14 +50,17 @@ This project uses Terraform and Terragrunt to manage infrastructure for multiple
 
 Ensure you have the following installed:
 
-- [Terraform](https://www.terraform.io/downloads.html)
+- [Terraform](https://developer.hashicorp.com/terraform/install)
 - [Terragrunt](https://terragrunt.gruntwork.io/)
+- [Packer](https://developer.hashicorp.com/packer/install)
 - [GNU Make](https://www.gnu.org/software/make/)
 - [Git](https://git-scm.com/)
 
+# Terraform
+
 ## Makefile Targets
 
-```
+```bash
 help      : Display help information
 files     : List all files excluding `.git`
 docs      : Generate Terraform documentation
@@ -99,6 +102,23 @@ Specify the appropriate `tfvars` file for your environment.
 
 Set `TF_VAR_CI_ENVIRONMENT_NAME` to specify the environment (`dev`, `pre`, `prod`).
 Set `TF_VAR_CF_CLOUDFLARED_TOKEN` to specify `cloudflared` token.
+
+# Packer
+
+Packer is used to build a public AWS AMI image for Terraform.
+
+## Makefile Targets
+
+```bash
+help          : Display help information
+packer-fmt    : Format Packer files
+packer-init   : Initialize Packer
+packer-build  : Build Packer images
+```
+
+## Packer Configuration
+
+Ensure you have the necessary `*.pkr.hcl` files configured for building your AMI.
 
 ## License
 

@@ -126,11 +126,11 @@ data "aws_ami" "selected" {
   most_recent = true
   filter {
     name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-*-22.04-amd64-server-*"]
+    values = ["ubuntu/images/ubuntu-jammy-22.04-amd64/cloudflared-nat-*"]
   }
   filter {
     name   = "virtualization-type"
     values = ["hvm"]
   }
-  owners = ["amazon"]
+  owners = ["730335449891"]
 }

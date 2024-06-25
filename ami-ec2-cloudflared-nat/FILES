@@ -1,0 +1,8 @@
+   548445      4 drwxr-xr-x   3 root     root         4096 Jun 25 02:43 .
+   548448      4 -rw-r--r--   1 root     root         1781 Jun 25 02:46 ./ami-ec2-cloudflared-nat.pkr.hcl
+   548446      0 -rw-r--r--   1 root     root            0 Jun 25 02:57 ./FILES
+   548447      4 -rw-r--r--   1 root     root          451 Jun 25 02:14 ./Makefile
+   548450      4 -rw-r--r--   1 root     root         1468 Jun 25 02:49 ./user_data.sh
+   548452      4 drwxr-xr-x   3 root     root         4096 Jun 25 02:43 ./files
+   548453      4 drwxr-xr-x   2 root     root         4096 Jun 25 02:43 ./files/cloudflared
+   548449      4 -rw-r--r--   1 root     root          250 Jun 25 02:44 ./files/cloudflared/docker-compose.yml

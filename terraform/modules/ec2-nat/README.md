@@ -20,13 +20,13 @@
 
 | Name | Type |
 |------|------|
-| [aws_eip.nat](https://registry.terraform.io/providers/hashicorp/aws/5.39.1/docs/resources/eip) | resource |
-| [aws_eip_association.nat](https://registry.terraform.io/providers/hashicorp/aws/5.39.1/docs/resources/eip_association) | resource |
-| [aws_route.private_route](https://registry.terraform.io/providers/hashicorp/aws/5.39.1/docs/resources/route) | resource |
-| [aws_security_group.default](https://registry.terraform.io/providers/hashicorp/aws/5.39.1/docs/resources/security_group) | resource |
-| [aws_ami.nat](https://registry.terraform.io/providers/hashicorp/aws/5.39.1/docs/data-sources/ami) | data source |
+| [aws_eip.selected](https://registry.terraform.io/providers/hashicorp/aws/5.39.1/docs/resources/eip) | resource |
+| [aws_eip_association.selected](https://registry.terraform.io/providers/hashicorp/aws/5.39.1/docs/resources/eip_association) | resource |
+| [aws_route.selected](https://registry.terraform.io/providers/hashicorp/aws/5.39.1/docs/resources/route) | resource |
+| [aws_security_group.selected](https://registry.terraform.io/providers/hashicorp/aws/5.39.1/docs/resources/security_group) | resource |
+| [aws_ami.selected](https://registry.terraform.io/providers/hashicorp/aws/5.39.1/docs/data-sources/ami) | data source |
 | [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/5.39.1/docs/data-sources/region) | data source |
-| [aws_route_table.private](https://registry.terraform.io/providers/hashicorp/aws/5.39.1/docs/data-sources/route_table) | data source |
+| [aws_route_table.selected](https://registry.terraform.io/providers/hashicorp/aws/5.39.1/docs/data-sources/route_table) | data source |
 | [aws_subnets.private_a](https://registry.terraform.io/providers/hashicorp/aws/5.39.1/docs/data-sources/subnets) | data source |
 | [aws_subnets.private_b](https://registry.terraform.io/providers/hashicorp/aws/5.39.1/docs/data-sources/subnets) | data source |
 | [aws_subnets.private_c](https://registry.terraform.io/providers/hashicorp/aws/5.39.1/docs/data-sources/subnets) | data source |
