@@ -7,7 +7,7 @@ on:
 
 env:
   PACKER_DIR: "./ami-ec2-cloudflared-nat"
-  PACKER_FILE: "ami-ec2-buildx-fleet.pkr.hcl"
+  PACKER_FILE: "ami-ec2-cloudflared-nat.pkr.hcl"
 
 jobs:
   packer:
