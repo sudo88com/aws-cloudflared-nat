@@ -23,28 +23,24 @@ function install_docker() {
 }
 
 function install_cloudflared() {
-    mkdir -p ~/cloudflared
-    echo "services:" > ~/cloudflared/docker-compose.yml
-    echo "
-  cloudflared:
-    container_name: cloudflared
-    image: cloudflare/cloudflared:latest
-    restart: always
-    command: tunnel --no-autoupdate run --token "\${CF_CLOUDFLARED_TOKEN}"
-    network_mode: "host"
-" >> ~/cloudflared/docker-compose.yml
+    sudo -u ubuntu mkdir -p /home/ubuntu/cloudflared
+    # docker-compose.yml file is already transferred by Packer
 }
 
-function run_cloudflared() {
-    cd ~/cloudflared
-    docker compose up -d
+function ami_startup() {
+    sudo systemctl enable docker
+    sudo systemctl stop docker
+    sudo systemctl enable ssh
+    sudo rm -rf /var/log/*
+    sudo rm -rf /tmp/*
+    sudo rm -rf /var/tmp/*
 }
 
 function main() {
     install_nat
     install_docker
     install_cloudflared
-    run_cloudflared
+    ami_startup
 }
 
 set -o errexit

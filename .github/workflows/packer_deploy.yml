@@ -1,0 +1,53 @@
+name: 'Packer Deploy'
+
+on:
+  push:
+    tags:
+      - '*'
+
+env:
+  PACKER_DIR: "./ami-ec2-cloudflared-nat"
+  PACKER_FILE: "ami-ec2-buildx-fleet.pkr.hcl"
+
+jobs:
+  packer:
+    runs-on: ubuntu-latest
+    name: Run Packer
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+
+      - name: Setup `packer`
+        uses: hashicorp/setup-packer@main
+        id: setup
+        with:
+          version: "latest"
+
+      - name: Extract tag name
+        id: extract_tag
+        run: |
+          TAG_NAME=${GITHUB_REF##*/}
+          FIX_TAG=${TAG_NAME#v}
+          echo "TAG=${FIX_TAG}" >> $GITHUB_ENV
+
+      - name: Run `packer init`
+        id: init
+        run: packer init ${{ env.PACKER_FILE }}
+        working-directory: ${{ env.PACKER_DIR }}
+
+      - name: Run `packer validate`
+        id: validate
+        run: packer validate ${{ env.PACKER_FILE }}
+        working-directory: ${{ env.PACKER_DIR }}
+
+      - name: Run `packer build`
+        id: build
+        run: packer build ${{ env.PACKER_FILE }}
+        working-directory: ${{ env.PACKER_DIR }}

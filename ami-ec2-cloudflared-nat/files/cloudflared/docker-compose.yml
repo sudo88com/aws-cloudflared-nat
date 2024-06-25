@@ -1,0 +1,10 @@
+---
+services:
+  cloudflared:
+    container_name: cloudflared
+    image: cloudflare/cloudflared:latest
+    restart: always
+    command: tunnel --no-autoupdate run --token "${CF_CLOUDFLARED_TOKEN}"
+    network_mode: "host"
+    env_file:
+      - ./.env
