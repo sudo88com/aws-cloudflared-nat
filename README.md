@@ -24,26 +24,38 @@ This project uses Terraform and Terragrunt to manage infrastructure for multiple
 
 ```
 .
-├── FILES
-├── Makefile
+├── LICENSE
 ├── README.md
-├── dev.tfvars
-├── modules
-│   └── vpc
-│       ├── README.md
-│       ├── _locals.tf
-│       ├── _main.tf
-│       ├── _output.tf
-│       ├── _variable.tf
-│       ├── data.tf
-│       ├── default.tfvars
-│       ├── dev.tfvars
-│       ├── pre.tfvars
-│       ├── prod.tfvars
-│       └── terragrunt.hcl
-├── pre.tfvars
-├── prod.tfvars
-└── terragrunt.hcl
+├── ami-ec2-cloudflared-nat
+│   ├── FILES
+│   ├── Makefile
+│   ├── ami-ec2-cloudflared-nat.pkr.hcl
+│   ├── files
+│   │   └── cloudflared
+│   │       └── docker-compose.yml
+│   └── user_data.sh
+└── terraform
+    ├── FILES
+    ├── Makefile
+    ├── dev.tfvars
+    ├── modules
+    │   └── ec2-nat
+    │       ├── README.md
+    │       ├── _locals.tf
+    │       ├── _main.tf
+    │       ├── _output.tf
+    │       ├── _variables.tf
+    │       ├── data.tf
+    │       ├── default.tfvars
+    │       ├── dev.tfvars
+    │       ├── docker-compose.yml
+    │       ├── pre.tfvars
+    │       ├── prod.tfvars
+    │       ├── terragrunt.hcl
+    │       └── user_data.sh
+    ├── pre.tfvars
+    ├── prod.tfvars
+    └── terragrunt.hcl
 ```
 
 ## Prerequisites

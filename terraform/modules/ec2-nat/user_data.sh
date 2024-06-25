@@ -5,6 +5,7 @@ function configure_cloudflared() {
 }
 
 function start_cloudflared() {
+    sudo usermod -aG docker ubuntu
     sudo -u ubuntu docker compose -f /home/ubuntu/cloudflared/docker-compose.yml up -d
 }
 
