@@ -15,6 +15,9 @@
 [![Terraform Apply](https://github.com/sudo88com/aws-cloudflared-nat/actions/workflows/terragrunt_apply.yml/badge.svg?branch=prod)](https://github.com/sudo88com/aws-cloudflared-nat/actions/workflows/terragrunt_apply.yml)
 [![Terraform Destroy](https://github.com/sudo88com/aws-cloudflared-nat/actions/workflows/terragrunt_destroy.yml/badge.svg?branch=prod)](https://github.com/sudo88com/aws-cloudflared-nat/actions/workflows/terragrunt_destroy.yml)
 
+[![Packer Deploy](https://github.com/sudo88com/aws-cloudflared-nat/actions/workflows/packer_deploy.yml/badge.svg)](https://github.com/sudo88com/aws-cloudflared-nat/actions/workflows/packer_deploy.yml)
+[![Packer Version](https://img.shields.io/github/v/release/sudo88com/aws-cloudflared-nat.svg)](https://github.com/sudo88com/aws-cloudflared-nat/releases)
+
 ## Overview
 This setup configures a t3.nano EC2 instance to act as a NAT gateway with a Cloudflared tunnel, allowing Cloudflare WARP to access all VPC CIDR.
 
