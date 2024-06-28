@@ -51,3 +51,9 @@ jobs:
         id: build
         run: packer build ${{ env.PACKER_FILE }}
         working-directory: ${{ env.PACKER_DIR }}
+
+      - name: Run Slack Notification
+        if: always()
+        uses: sudo88com/slacknotify-action@v1
+        with:
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}

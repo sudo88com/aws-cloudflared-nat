@@ -6,6 +6,7 @@ on:
       - dev
       - pre
       - prod
+  workflow_dispatch:
 
 env:
   tf_version: '1.5.7'
@@ -60,3 +61,9 @@ jobs:
           tg_version: ${{ env.tg_version }}
           tg_dir: ${{ env.working_dir }}
           tg_command: 'run-all plan --var-file=${{ github.ref_name }}.tfvars'
+
+      - name: Run Slack Notification
+        if: always()
+        uses: sudo88com/slacknotify-action@v1
+        with:
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
