@@ -1,11 +1,7 @@
+---
 name: 'Terraform Apply'
 
 on:
-  push:
-    branches:
-      - dev
-      - pre
-      - prod
   workflow_dispatch:
 
 env:
