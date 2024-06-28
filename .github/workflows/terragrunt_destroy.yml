@@ -2,11 +2,6 @@
 name: 'Terraform Destroy'
 
 on:
-  push:
-    branches:
-      - dev
-      - pre
-      - prod
   workflow_dispatch:
 
 env:
@@ -17,7 +12,6 @@ env:
 jobs:
   checks:
     runs-on: ubuntu-latest
-    environment: ${{ github.ref_name }}
     steps:
       - name: 'Checkout'
         uses: actions/checkout@main
