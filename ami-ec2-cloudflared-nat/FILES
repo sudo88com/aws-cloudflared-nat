@@ -1,8 +1,0 @@
-   517663      4 drwxrwxr-x   3 ubuntu   ubuntu       4096 Jun 28 19:25 .
-   517665      4 -rw-rw-r--   1 ubuntu   ubuntu        451 Jun 28 19:16 ./Makefile
-   517666      4 -rw-rw-r--   1 ubuntu   ubuntu       1781 Jun 28 19:16 ./ami-ec2-cloudflared-nat.pkr.hcl
-   517667      4 drwxrwxr-x   3 ubuntu   ubuntu       4096 Jun 28 19:16 ./files
-   517668      4 drwxrwxr-x   2 ubuntu   ubuntu       4096 Jun 28 19:16 ./files/cloudflared
-   517669      4 -rw-rw-r--   1 ubuntu   ubuntu        250 Jun 28 19:16 ./files/cloudflared/docker-compose.yml
-   517670      4 -rw-rw-r--   1 ubuntu   ubuntu       1534 Jun 28 19:16 ./user_data.sh
-   517664      0 -rw-rw-r--   1 ubuntu   ubuntu          0 Jun 28 19:25 ./FILES
